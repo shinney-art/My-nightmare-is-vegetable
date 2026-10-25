@@ -13,7 +13,7 @@ public class playermovement : MonoBehaviour
     public Animator anim;
 
     private Vector2 movement;
-    private Vector2 lastMoveDirection = Vector2.down;
+    private Vector2 lastMoveDirection = Vector2.right;
 
     void Awake()
     {
