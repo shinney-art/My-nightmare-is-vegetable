@@ -64,7 +64,7 @@ public class Dialog : MonoBehaviour
         }
         else if (scene == 10)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
         }
     }
 
