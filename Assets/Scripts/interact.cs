@@ -22,9 +22,5 @@ public class interact : MonoBehaviour
         {
             UI.gameObject.SetActive(true);
         }
-        else
-        {
-            UI.gameObject.SetActive(false);
-        }
     }
 }
