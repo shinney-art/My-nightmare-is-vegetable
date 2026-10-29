@@ -17,7 +17,7 @@ public class HealthBar : MonoBehaviour
 
     public void UpdateBar(int hp)
     {
-        hp10Bar.SetActive(hp == 10);
+        
         hp9Bar.SetActive(hp == 9);
         hp8Bar.SetActive(hp == 8);
         hp7Bar.SetActive(hp == 7);
