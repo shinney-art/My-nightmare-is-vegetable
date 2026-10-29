@@ -23,4 +23,11 @@ public class interact : MonoBehaviour
             UI.gameObject.SetActive(true);
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            UI.gameObject.SetActive(true);
+        }
+    }
 }
