@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 
     public Transform target;
 
-    public float detectionDistance = 20f;
+    public float detectionDistance = 10f;
     public float stopDistance = 1.5f;
 
     void Start()

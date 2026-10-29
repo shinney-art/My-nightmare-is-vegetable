@@ -2,34 +2,30 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattleSystem : MonoBehaviour
+public class Battle : MonoBehaviour
 {
-    // The 4 characters
-    public int[] playerHP = { 100, 100, 100, 100 };
-
     // Bat, Fists, Pencil, Whisk
+    public int[] playerHP = { 100, 100, 100, 100 };
     public int[] playerDamage = { 35, 15, 10, 20 };
 
-    // The enemy
     public int enemyHP = 500;
     public int enemyDamage = 25;
 
-    public Text playerHPText;
-    public Text enemyHPText;
+    public HealthBar[] playerBars;
+    public HealthBar enemyBar;
 
     public Button attackButton;
     public Button guardButton;
 
     int currentPlayer = 0;
-    bool isGuarding = false;
     bool battleOver = false;
 
     void Start()
     {
-        UpdateHP();
-
         attackButton.onClick.AddListener(Attack);
         guardButton.onClick.AddListener(Guard);
+
+        UpdateBars();
     }
 
     void Attack()
@@ -39,53 +35,39 @@ public class BattleSystem : MonoBehaviour
         // Current character attacks
         enemyHP -= playerDamage[currentPlayer];
 
-        if (enemyHP <= 0)
-        {
+        if (enemyHP < 0)
             enemyHP = 0;
-            battleOver = true;
-        }
-        else
+
+        UpdateBars();
+
+        if (enemyHP == 0)
         {
-            EnemyTurn();
+            battleOver = true;
+            return;
         }
 
-        UpdateHP();
+        EnemyTurn(false);
     }
 
     void Guard()
     {
         if (battleOver) return;
 
-        // Block the enemy's next attack
-        isGuarding = true;
-        EnemyTurn();
-
-        UpdateHP();
+        // Guard blocks the next enemy attack
+        EnemyTurn(true);
     }
 
-    void EnemyTurn()
+    void EnemyTurn(bool guarding)
     {
-        if (isGuarding)
-        {
-            isGuarding = false;
-        }
-        else
+        if (!guarding)
         {
             playerHP[currentPlayer] -= enemyDamage;
 
-            if (playerHP[currentPlayer] <= 0)
-            {
+            if (playerHP[currentPlayer] < 0)
                 playerHP[currentPlayer] = 0;
-            }
         }
 
-        // Move to the next character
-        currentPlayer++;
-
-        if (currentPlayer >= playerHP.Length)
-        {
-            currentPlayer = 0;
-        }
+        UpdateBars();
 
         // Check if everyone is defeated
         bool allDead = true;
@@ -93,27 +75,39 @@ public class BattleSystem : MonoBehaviour
         for (int i = 0; i < playerHP.Length; i++)
         {
             if (playerHP[i] > 0)
-            {
                 allDead = false;
-                break;
-            }
         }
 
         if (allDead)
         {
             battleOver = true;
+            return;
+        }
+
+        // Move to the next living character
+        for (int i = 0; i < playerHP.Length; i++)
+        {
+            currentPlayer++;
+
+            if (currentPlayer >= playerHP.Length)
+                currentPlayer = 0;
+
+            if (playerHP[currentPlayer] > 0)
+                break;
         }
     }
 
-    void UpdateHP()
+    void UpdateBars()
     {
-        playerHPText.text =
-            "Bat: " + playerHP[0] +
-            " | Fists: " + playerHP[1] +
-            " | Pencil: " + playerHP[2] +
-            " | Whisk: " + playerHP[3];
+        // Update each player's HP image
+        for (int i = 0; i < playerHP.Length; i++)
+        {
+            int barHP = Mathf.CeilToInt(playerHP[i] / 10f);
+            playerBars[i].UpdateBar(barHP);
+        }
 
-        enemyHPText.text = "Enemy HP: " + enemyHP;
+        // Enemy has 500 HP, so each square represents 50 HP
+        int enemyBarHP = Mathf.CeilToInt(enemyHP / 50f);
+        enemyBar.UpdateBar(enemyBarHP);
     }
 }
-

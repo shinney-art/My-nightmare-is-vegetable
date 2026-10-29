@@ -6,7 +6,7 @@ using UnityEngine;
 public class playermovement2 : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed = 5f;
+    public float moveSpeed = 10f;
 
     [Header("Components")]
     public Rigidbody2D rb;
