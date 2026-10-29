@@ -7,8 +7,9 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent agent;
 
     public Transform target;
+    public GameObject gameOverImage;
 
-    public float detectionDistance = 10f;
+    public float detectionDistance = 20f;
     public float stopDistance = 1.5f;
 
     void Start()
@@ -18,6 +19,8 @@ public class Enemy : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         agent.stoppingDistance = stopDistance;
+
+        gameOverImage.SetActive(false);
     }
 
     void Update()
@@ -26,8 +29,7 @@ public class Enemy : MonoBehaviour
             return;
 
         float distance = Vector3.Distance(
-            transform.position,
-            target.position
+            transform.position, target.position
         );
 
         if (distance <= detectionDistance)
@@ -39,4 +41,18 @@ public class Enemy : MonoBehaviour
             agent.ResetPath();
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collision detected!");
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player touched enemy!");
+
+            gameOverImage.SetActive(true);
+            Time.timeScale = 0f;
+        }
+    }
 }
+
