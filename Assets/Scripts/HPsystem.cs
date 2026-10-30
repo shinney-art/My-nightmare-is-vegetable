@@ -4,7 +4,7 @@ using TMPro;
 
 public class HPSystem : MonoBehaviour
 {
-    public int enemyHP = 500;
+    public int enemyHP = 300;
     public int playerStartingHP = 100;
 
     public int[] playerHP = new int[4];
