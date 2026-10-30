@@ -20,4 +20,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/classroom.unity
     guid: 00cb813c456fb8644a4d0456ebbc6a49
+  - enabled: 1
+    path: Assets/Scenes/hallway.unity
+    guid: 51c86fe45a9781d448c73ee2292f1537
+  - enabled: 1
+    path: Assets/Scenes/SchoolFistFloor.unity
+    guid: f04c37f965af4dc48956ce87c793f5d3
+  - enabled: 1
+    path: Assets/Scenes/School1stfloor2.unity
+    guid: 07a3fc274ecc58b458efa40a85c80457
+  - enabled: 1
+    path: Assets/Scenes/day2bedroom.unity
+    guid: 8ad39511673e1144fbc5e6fe18e8e3fe
+  - enabled: 1
+    path: Assets/Scenes/EndBeforeCred.unity
+    guid: 18c8e81699898954b945b5802f77e41d
+  - enabled: 1
+    path: Assets/Scenes/Creditscene.unity
+    guid: 4c9ccd5159ade8140a4fa14f6494f1d1
   m_configObjects: {}
