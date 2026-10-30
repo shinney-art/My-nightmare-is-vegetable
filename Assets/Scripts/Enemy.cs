@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent agent;
 
     public Transform target;
+    public GameObject Audio;
     public GameObject gameOverImage;
 
     public float detectionDistance = 20f;
@@ -50,6 +51,7 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Player touched enemy!");
 
+            Audio.SetActive(false);
             gameOverImage.SetActive(true);
             Time.timeScale = 0f;
         }
